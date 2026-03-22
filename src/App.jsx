@@ -43,6 +43,7 @@ function parseApproval(raw) {
     title: raw.title || lines[0] || "（タイトルなし）",
     detail: raw.detail || lines[1] || "",
     deadline: raw.deadline || "",
+    other: raw.other || "",
     urgency: raw.urgency || "通常",
     date: raw.createdAt ? raw.createdAt.slice(0, 10) : "",
     requester: raw.requester || "不明",
@@ -68,7 +69,7 @@ function HistoryItem({ item }) {
       <Avatar initials={item.initials} color={item.color} size={34} />
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: 13, color: "#e2e8f0", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-          {item.requester}・{item.type}
+          {item.requester}・{item.title || "決裁依頼"}
         </div>
         <div style={{ fontSize: 11, color: "#475569", marginTop: 2 }}>{item.amount !== "—" ? item.amount : "金額なし"}</div>
       </div>
@@ -313,7 +314,7 @@ export default function App() {
               >
                 {/* バッジ */}
                 <div style={{ display: "flex", gap: 8, marginBottom: 22 }}>
-                  <span style={{ background: "#f1f5f9", color: "#475569", fontSize: 12, fontWeight: 600, padding: "5px 14px", borderRadius: 20 }}>{card.type}</span>
+                  <span style={{ background: "#f1f5f9", color: "#475569", fontSize: 12, fontWeight: 600, padding: "5px 14px", borderRadius: 20 }}>決裁依頼</span>
                   {card.urgency === "急ぎ" && <span style={{ background: "#fef2f2", color: "#ef4444", fontSize: 12, fontWeight: 600, padding: "5px 14px", borderRadius: 20 }}>🔴 急ぎ</span>}
                 </div>
 
@@ -356,6 +357,14 @@ export default function App() {
                       <div style={{ fontSize: 11, color: "#94a3b8", fontWeight: 600, letterSpacing: 1 }}>期限</div>
                       <div style={{ fontSize: 14, color: "#ea580c", fontWeight: 700 }}>{card.deadline}</div>
                     </div>
+                  </div>
+                )}
+
+                {/* その他 */}
+                {card.other && (
+                  <div style={{ background: "#f8fafc", borderRadius: 12, padding: "12px 15px", marginBottom: 14, border: "1px solid #e2e8f0" }}>
+                    <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4, fontWeight: 600, letterSpacing: 1 }}>その他</div>
+                    <div style={{ fontSize: 13, color: "#475569", lineHeight: 1.7 }}>{card.other}</div>
                   </div>
                 )}
 

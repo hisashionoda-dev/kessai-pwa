@@ -9,8 +9,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 
 // ── 設定 ─────────────────────────────────────────────────────────
-const API_URL = import.meta?.env?.VITE_API_URL || "http://localhost:3000";
-const MY_USER_ID = import.meta?.env?.VITE_USER_ID || "U_DEMO";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const MY_USER_ID = import.meta.env.VITE_USER_ID || "U_DEMO";
 
 // デモ用モックデータ（APIが繋がらないときのフォールバック）
 const MOCK_APPROVALS = [
